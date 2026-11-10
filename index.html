@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bye Bye Gaylexander</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fff6ec;
+    --ink: #1d1420;
+    --muted: #6b5a6e;
+    --accent: #ff4f8b;
+    --accent-2: #ffb02e;
+    --card: #ffffff;
+    --line: #ecd9cc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17111a; --ink: #fbeff4; --muted: #b8a6bb;
+      --card: #221a26; --line: #3a2d3f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17111a; --ink: #fbeff4; --muted: #b8a6bb;
+    --card: #221a26; --line: #3a2d3f;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  main { max-width: 900px; margin: 0 auto; padding: 0 16px 64px; }
+
+  .hero {
+    min-height: 78vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative;
+  }
+  .wave { font-size: clamp(3rem, 10vw, 5rem); display: inline-block; animation: wave 1.8s ease-in-out infinite; transform-origin: 70% 80%; }
+  @keyframes wave { 0%,60%,100% { transform: rotate(0); } 10%,30% { transform: rotate(16deg); } 20%,40% { transform: rotate(-10deg); } }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(2.6rem, 11vw, 7.5rem);
+    line-height: .92;
+    letter-spacing: -0.04em;
+    margin: .2em 0 .25em;
+  }
+  h1 .name {
+    background: linear-gradient(90deg, #ff4f8b, #ffb02e, #3ec7a6, #4f8bff, #b44fff, #ff4f8b);
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: slide 8s linear infinite;
+  }
+  @keyframes slide { to { background-position: 300% 0; } }
+  .sub { color: var(--muted); font-size: clamp(1rem, 2.6vw, 1.3rem); max-width: 32ch; margin: 0; }
+  .scroll { margin-top: 2.5rem; color: var(--muted); font-size: .9rem; animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(6px); } }
+
+  .video-section h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin: 0 0 .3em; letter-spacing: -0.02em; }
+  .video-section p { color: var(--muted); margin: 0 0 1.2rem; }
+
+  .drop {
+    border: 2.5px dashed var(--line);
+    border-radius: 22px;
+    background: var(--card);
+    aspect-ratio: 16 / 9;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem;
+    text-align: center; padding: 24px; cursor: pointer;
+    transition: border-color .2s, transform .2s;
+  }
+  .drop:hover, .drop.over { border-color: var(--accent); transform: scale(1.01); }
+  .drop .icon { font-size: 3rem; }
+  .drop strong { font-size: 1.15rem; }
+  .drop small { color: var(--muted); }
+  .btn {
+    background: var(--accent); color: #fff; border: 0; border-radius: 999px;
+    padding: .7em 1.4em; font: inherit; font-weight: 800; cursor: pointer;
+  }
+  .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--line); }
+
+  .player { display: none; }
+  .player.show { display: block; }
+  .player video {
+    width: 100%; border-radius: 22px; background: #000; display: block;
+    box-shadow: 0 20px 50px -20px rgba(255, 79, 139, .45);
+  }
+  .player .row { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: .8rem; }
+  .player .fname { color: var(--muted); font-size: .9rem; overflow-wrap: anywhere; }
+
+  footer { text-align: center; color: var(--muted); padding: 48px 16px 32px; font-size: .95rem; }
+
+  .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .confetti span {
+    position: absolute; top: -20px; width: 10px; height: 16px; border-radius: 3px; opacity: .85;
+    animation: fall linear infinite;
+  }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+  main, footer { position: relative; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+    .confetti { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<main>
+  <section class="hero">
+    <div class="wave">👋</div>
+    <h1>bye bye<br><span class="name">Gaylexander</span></h1>
+    <p class="sub">It's been real. Go be legendary somewhere else.</p>
+    <div class="scroll">↓ there's a video ↓</div>
+  </section>
+
+  <section class="video-section">
+    <h2>The farewell tape 🎬</h2>
+    <p>Hit play. Tissues optional.</p>
+
+    <label class="drop" id="drop" for="file">
+      <div class="icon">📼</div>
+      <strong>Drag &amp; drop your video here</strong>
+      <small>MP4, WebM, MOV — it plays right here and never leaves this device</small>
+      <span class="btn">Choose video</span>
+    </label>
+    <input type="file" id="file" accept="video/*" hidden>
+
+    <div class="player" id="player">
+      <video id="video" controls playsinline></video>
+      <div class="row">
+        <span class="fname" id="fname"></span>
+        <button class="btn ghost" id="swap" type="button">Swap video</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Made with ❤️ (and zero tears, obviously)</footer>
+
+<script>
+  // Confetti
+  const colors = ['#ff4f8b', '#ffb02e', '#3ec7a6', '#4f8bff', '#b44fff'];
+  const box = document.getElementById('confetti');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.background = colors[i % colors.length];
+    s.style.animationDuration = 6 + Math.random() * 8 + 's';
+    s.style.animationDelay = -Math.random() * 14 + 's';
+    s.style.transform = `rotate(${Math.random() * 360}deg)`;
+    box.appendChild(s);
+  }
+
+  // Video upload (local playback)
+  const drop = document.getElementById('drop');
+  const input = document.getElementById('file');
+  const player = document.getElementById('player');
+  const video = document.getElementById('video');
+  const fname = document.getElementById('fname');
+  let currentUrl = null;
+
+  function load(file) {
+    if (!file || !file.type.startsWith('video/')) {
+      alert('That doesn\'t look like a video file.');
+      return;
+    }
+    if (currentUrl) URL.revokeObjectURL(currentUrl);
+    currentUrl = URL.createObjectURL(file);
+    video.src = currentUrl;
+    fname.textContent = file.name;
+    drop.style.display = 'none';
+    player.classList.add('show');
+    video.play().catch(() => {});
+  }
+
+  input.addEventListener('change', e => load(e.target.files[0]));
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => load(e.dataTransfer.files[0]));
+  document.getElementById('swap').addEventListener('click', () => { input.value = ''; input.click(); });
+
+  // Default video bundled with the page
+  video.src = 'farewell.mp4';
+  fname.textContent = 'farewell.mp4';
+  drop.style.display = 'none';
+  player.classList.add('show');
+  video.addEventListener('error', () => {
+    if (currentUrl) return;
+    player.classList.remove('show');
+    drop.style.display = '';
+  }, { once: true });
+</script>
+</body>
+</html>
